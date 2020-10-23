@@ -6,6 +6,9 @@
 #define debug(x) Serial.print(x)
 #define CS11_I2C_ADDRESS 0x04
 
+#define LED_RED 12
+#define LED_GREEN 13
+
 xSW01 SW01;
 
 String data;
@@ -21,6 +24,9 @@ int success = 0;
 void setup()
 {
   Serial.begin(115200);
+  
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
 
 #ifdef ESP8266
   Wire.pins(2, 14);
@@ -58,17 +64,20 @@ void begin()
     if (testSlave())
     {
       debug("\nData Logger mode Successful.");
+	  digitalWrite(LED_GREEN, HIGH);
       success = 1;
     }
     else
     {
       debug("\nFailed to test slave. Data logger mode disabled.");
       success = 0;
+	  digitalWrite(LED_RED, HIGH);
     }
   }
   else
   {
     debug("\nFailed to ping slave. Data logger mode disabled.");
+	digitalWrite(LED_RED, HIGH);
     success = 0;
   }
 }
@@ -105,7 +114,7 @@ bool testSlave()
 bool pingSlave()
 {
   debug("\nATTEMPTING TO PING SLAVE");
-  uint32_t period = 1 * 2000L;
+  uint32_t period = 10 * 2000L;
   for (uint32_t tStart = millis(); (millis() - tStart) < period;)
   {
     if (xCore.ping(CS11_I2C_ADDRESS))
