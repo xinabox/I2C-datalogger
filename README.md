@@ -8,7 +8,7 @@ Use CW01 to log data to SD card using CS11 as a slave device. This guide helps y
 * microSD card
 
 ### How to do
-* Download latest release from this page. The release contains two file **UPDATE.bin** and **RESTART.UF2**. Copy and paste **UPDATE.bin** file to your microSD card, and put it into CS11 slot.
+* Download latest release from this page. The release contains two file **UPDATE.bin** and **RESTART.UF2**. Copy and paste UPDATE.bin file to your microSD card, and put it into CS11 slot.
 * From examples, flash **DATA_LOGGER-RandomNumber.ino** code to your CW01
 * Now connect CW01, CS11 and IP01, and power the xchips with your laptop/Power Bank
 * If successfully done, CW01 will shine Green LED, and CS11 will shine RED LED. That means data is being logged
